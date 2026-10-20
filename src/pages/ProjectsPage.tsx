@@ -33,13 +33,27 @@ function handleSubmitProject(){
     name: trimmedName,
     description:projectDescription.trim(),
     status:"Active",
-createdAt: new Date().toISOString().slice(0, 10),    taskCount:0,
+createdAt: new Date().toISOString().slice(0, 10), 
+   taskCount:0,
 };
 setProjectList((prev)=>[...prev,newProject]);
 
 setProjectName("");
 setProjectDescription("");
 setShowCreateForm(false);
+}
+
+// ------ function to delete card
+function handleDeleteProject(id:number){
+    const confirmed = window.confirm(
+        "Are you sure you want to delete this project?"
+    );
+    if(!confirmed){
+        return;
+    }
+
+   setProjectList((prev) => 
+prev.filter((project)=>project.id!==id))
 }
     return (
         <div className="projects-page">
@@ -83,6 +97,7 @@ setShowCreateForm(false);
                     <ProjectCard
                         key={project.id}
                         project={project}
+                        onDelete={handleDeleteProject}
                     />
                 );
             })}

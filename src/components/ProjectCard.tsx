@@ -3,9 +3,10 @@ import "../css/ProjectCard.css"
 import "../css/index.css"
 interface ProjectCardProps {
   project: Project;
+  onDelete:(id:number) => void;
 }
 
-function ProjectCard({ project }: ProjectCardProps) {
+function ProjectCard({ project,onDelete }: ProjectCardProps) {
   return (
     <article className="project-card">
       <h2>{project.name}</h2>
@@ -23,6 +24,7 @@ function ProjectCard({ project }: ProjectCardProps) {
         Created: <time>{project.createdAt}</time>
       </p>
     
+    <button onClick={()=>onDelete(project.id)} >Delete</button>
     </article>
   );
 }
