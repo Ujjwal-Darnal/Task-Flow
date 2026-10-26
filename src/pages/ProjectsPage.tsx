@@ -55,7 +55,27 @@ function handleDeleteProject(id:number){
    setProjectList((prev) => 
 prev.filter((project)=>project.id!==id))
 }
-    return (
+
+// ---- function to change the status
+function handleStatusChange(
+    id: number,
+    newStatus: Project["status"]
+) {
+    setProjectList(prev =>
+        prev.map(project => {
+            if (project.id === id) {
+                return {
+                    ...project,
+                    status: newStatus
+                };
+            } else {
+                return project;
+            }
+        })
+    );
+}
+
+return (
         <div className="projects-page">
             <h1>Projects</h1>
             <button onClick={toggleCreateForm}>{showCreateForm? "Cancel":"+New Project"}</button>
@@ -98,6 +118,7 @@ prev.filter((project)=>project.id!==id))
                         key={project.id}
                         project={project}
                         onDelete={handleDeleteProject}
+                        onStatusChange={handleStatusChange}
                     />
                 );
             })}
