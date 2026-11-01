@@ -1,5 +1,7 @@
-
+/* project card */
 .project-card {
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 0.75rem;
@@ -11,14 +13,101 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
+/* project title */
+
 .project-card h2 {
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0 0 0.75rem;
+  color: #0f172a;
 }
 
 .project-card > p {
   color: #64748b;
   font-size: 0.875rem;
   line-height: 1.5;
+  margin: 0 0 1rem;
+  overflow-wrap: anywhere;
 }
+
+/* project status */
+.project-status  {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1.25rem;
+
+}
+.project-status label{
+font-size: 0.875rem;
+font-weight: 500;
+color: #475569;
+}
+.project-status select {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background:#ffffff;
+  color: #334155;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.project-status select:hover {
+  border-color: #2563eb;
+}
+.project-status select:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 0;
+  border-color: transparent;
+}
+
+/* project meta */
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;}
+
+.project-meta p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* delete project button */
+.delete-project-btn {
+  background: #fef2f2;
+  color: #b91c1c;
+
+  border: 1px solid #fecaca;
+  border-radius: 0.5rem;
+
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-project-btn:hover {
+  background: #fee2e2;
+}
+
+.delete-project-btn:focus-visible {
+  outline: 2px solid #b91c1c;
+  outline-offset: 2px;
+}
+
+/* project - footer */
+.project-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+
+  display: flex;
+  justify-content: flex-end;
+}
+

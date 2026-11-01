@@ -77,24 +77,39 @@ function handleStatusChange(
 
 return (
         <div className="projects-page">
-            <h1>Projects</h1>
-            <button onClick={toggleCreateForm}>{showCreateForm? "Cancel":"+New Project"}</button>
+            <div className="projects-header">
+             <div>
+                   <h1>Projects</h1>
+                   <p>Manage and organize your projects</p>
+             </div>
+
+            <button
+            type="button"
+            className="new-project-btn"
+            onClick={toggleCreateForm}
+            >{showCreateForm? "Cancel":"+New Project"
+                }</button>
+            </div>
 
          { showCreateForm? <form
+         className="create-project-form"
           onSubmit={(e)=>{e.preventDefault();
             handleSubmitProject();
           }}>
+            <h2>Create New Project</h2>
             <label htmlFor="projectName" >Project Name</label>
             <input
             id="projectName" 
             type="text" 
             value={projectName}
+            placeholder="Enter project name"
             onChange={(e)=>setProjectName(e.target.value)}
             />
              <label htmlFor="projectDescription" >
             Project Description
          </label >
          <textarea 
+         placeholder="Describe your project"
          id="projectDescription"
          name="projectDescription" 
          value = {projectDescription}
@@ -103,7 +118,10 @@ return (
          }
          ></textarea>
 
-         <button type = "submit">Create Project</button>
+         <button 
+         className="create-project-submit"
+         type = "submit"
+         >Create Project</button>
          
          </form>:null}
         

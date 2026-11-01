@@ -34,7 +34,8 @@ function ProjectCard({ project,onDelete,onStatusChange }: ProjectCardProps) {
   </select>
 </div>
 
-      <p>Tasks: {project.taskCount}</p>
+<div className="project-meta">
+        <p>Tasks: {project.taskCount}</p>
 
       <p>
   Created: (
@@ -43,14 +44,18 @@ function ProjectCard({ project,onDelete,onStatusChange }: ProjectCardProps) {
     </time>
   )
 </p>
+</div>
     
-    <button
+<div className="project-footer">
+      <button
+      className="delete-project-btn"
   type="button"
   onClick={() => onDelete(project.id)}
   aria-label={`Delete ${project.name}`}
 >
   Delete
 </button>
+</div>
     </article>
   );
 }
