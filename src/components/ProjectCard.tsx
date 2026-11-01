@@ -5,9 +5,10 @@ interface ProjectCardProps {
   project: Project;
   onDelete:(id:number) => void;
   onStatusChange:(id:number,status:Project["status"])=>void;
+  onEdit:(id:number)=>void;
 }
 
-function ProjectCard({ project,onDelete,onStatusChange }: ProjectCardProps) {
+function ProjectCard({ project,onDelete,onStatusChange,onEdit }: ProjectCardProps) {
   return (
     <article className="project-card">
       <h2>{project.name}</h2>
@@ -55,6 +56,11 @@ function ProjectCard({ project,onDelete,onStatusChange }: ProjectCardProps) {
 >
   Delete
 </button>
+<button
+className="edit-project-btn"
+type="button"
+onClick={()=>onEdit(project.id)}
+aria-label={`Edit ${project.name}`}>Edit</button>
 </div>
     </article>
   );

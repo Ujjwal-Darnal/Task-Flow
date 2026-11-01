@@ -76,32 +76,7 @@ color: #475569;
   line-height: 1.5;
 }
 
-/* delete project button */
-.delete-project-btn {
-  background: #fef2f2;
-  color: #b91c1c;
-
-  border: 1px solid #fecaca;
-  border-radius: 0.5rem;
-
-  padding: 0.5rem 0.875rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.delete-project-btn:hover {
-  background: #fee2e2;
-}
-
-.delete-project-btn:focus-visible {
-  outline: 2px solid #b91c1c;
-  outline-offset: 2px;
-}
-
-/* project - footer */
+/*----- project - footer */
 .project-footer {
   margin-top: auto;
   padding-top: 1rem;
@@ -109,5 +84,6 @@ color: #475569;
 
   display: flex;
   justify-content: flex-end;
+  gap: 0.75rem;
 }
 
