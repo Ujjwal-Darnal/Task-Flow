@@ -1,0 +1,132 @@
+
+/* =====================================
+   TASKS PAGE
+===================================== */
+
+.tasks-page {
+  width: 100%;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ===== PAGE HEADING ===== */
+
+.tasks-page h1 {
+  margin: 0 0 1.75rem;
+  color: #0f172a;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* =====================================
+   PROJECT FILTER
+===================================== */
+
+.tasks-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.tasks-filter label {
+  color: #475569;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.tasks-filter select {
+  width: 100%;
+  max-width: 20rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.875rem;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+
+  color: #334155;
+  font-family: inherit;
+  font-size: 0.875rem;
+
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.tasks-filter select:hover {
+  border-color: #2563eb;
+}
+
+.tasks-filter select:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* =====================================
+   TASK GRID
+===================================== */
+
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 17.5rem), 1fr)
+  );
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+/* =====================================
+   EMPTY STATE
+===================================== */
+
+.tasks-grid > p {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0;
+  padding: 3rem 1.5rem;
+
+  background-color: #ffffff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 0.75rem;
+
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 480px) {
+  .tasks-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .tasks-page h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tasks-filter {
+    align-items: stretch;
+    margin-bottom: 1.5rem;
+  }
+
+  .tasks-filter select {
+    max-width: none;
+  }
+
+  .tasks-grid {
+    gap: 1rem;
+  }
+
+  .tasks-grid > p {
+    padding: 2.5rem 1rem;
+  }
+}

@@ -1,0 +1,176 @@
+
+/* =====================================
+   TASK CARD
+===================================== */
+
+.task-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.task-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* =====================================
+   TASK TITLE
+===================================== */
+
+.task-card h2 {
+  margin: 0 0 0.75rem;
+
+  color: #0f172a;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+/* =====================================
+   TASK DESCRIPTION
+===================================== */
+
+.task-card > p {
+  margin: 0 0 1rem;
+
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+/* =====================================
+   STATUS AND PRIORITY
+===================================== */
+
+.task-status,
+.task-priority {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.task-status label,
+.task-priority label {
+  color: #475569;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* =====================================
+   DROPDOWNS
+===================================== */
+
+.task-status select,
+.task-priority select {
+  width: auto;
+  max-width: 100%;
+  min-width: 8rem;
+
+  padding: 0.5rem 0.75rem;
+
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+
+  color: #334155;
+  font-family: inherit;
+  font-size: 0.875rem;
+
+  transition: border-color 0.2s ease;
+}
+
+/* ===== DISABLED DROPDOWNS ===== */
+
+.task-status select:disabled,
+.task-priority select:disabled {
+  opacity: 1;
+  background-color: #ffffff;
+  color: #475569;
+  -webkit-text-fill-color: #475569;
+  cursor: not-allowed;
+}
+
+/* ===== ENABLED DROPDOWNS ===== */
+
+.task-status select:not(:disabled),
+.task-priority select:not(:disabled) {
+  cursor: pointer;
+}
+
+.task-status select:not(:disabled):hover,
+.task-priority select:not(:disabled):hover {
+  border-color: #2563eb;
+}
+
+.task-status select:focus-visible,
+.task-priority select:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* =====================================
+   TASK META
+===================================== */
+
+.task-meta {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.task-meta p {
+  margin: 0;
+
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.task-meta time {
+  color: #334155;
+  font-weight: 500;
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 480px) {
+  .task-card {
+    padding: 1.25rem;
+  }
+
+  .task-status,
+  .task-priority {
+    gap: 0.5rem;
+  }
+}
+
+/* =====================================
+   REDUCED MOTION
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .task-card {
+    transition: none;
+  }
+}
