@@ -3,9 +3,17 @@ import  "../css/TaskCard.css"
 
 interface TaskCardProps {
   task: Task;
+  onStatusChange:(
+    id:number,
+    newStatus:Task["status"]
+  )=>void;
+  onPriorityChange:(
+    id:number,
+    newPriority:Task["priority"]
+  )=>void;
 }
 
-function TaskCard({ task }: TaskCardProps) {
+function TaskCard({ task,onStatusChange,onPriorityChange }: TaskCardProps) {
   return (
     <article className="task-card">
       <h2>{task.title}</h2>
@@ -21,7 +29,9 @@ function TaskCard({ task }: TaskCardProps) {
           name="status"
           id={`task-status-${task.id}`}
           value={task.status}
-          disabled
+          onChange={(e)=>
+            onStatusChange(task.id,e.target.value as Task["status"])
+          }
           
           
         >
@@ -41,7 +51,9 @@ function TaskCard({ task }: TaskCardProps) {
           name="priority"
           id={`task-priority-${task.id}`}
           value={task.priority}
-          disabled
+          onChange={(e)=>
+            onPriorityChange(task.id,e.target.value as Task["priority"])
+          }
           
         >
           <option value="High">High</option>

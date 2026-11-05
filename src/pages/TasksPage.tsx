@@ -3,13 +3,51 @@ import TaskCard from "../components/TaskCard"
 import { useState } from "react";
 import { projects } from "../data/projects";
 import "../css/TasksPage.css"
+import type { Task } from "../types/task";
 
 function TasksPage(){
 
 const [selectedProjectId,setSelectedProjectId] = useState<number | "all">("all");
 
-const filteredTasks = tasks.filter((task) => selectedProjectId=== "all" ? true:task.projectId === selectedProjectId);
+const[taskList,setTaskList] = useState<Task[]>(tasks);
 
+const filteredTasks = taskList.filter((task) => selectedProjectId=== "all" ? true:task.projectId === selectedProjectId);
+
+// function to update the status
+    function handleTaskStatusChange(
+      id:number,
+      newStatus: Task["status"]
+    ){
+      setTaskList(prev=>
+        prev.map(task=>{
+          if(task.id === id){
+            return{
+              ...task,status:newStatus
+            };
+          }else{
+            return task;
+          }
+        })
+      )
+    }
+
+// function to update the priority 
+function handleTaskPriorityChange(
+  id:number,
+  newPriority:Task["priority"]
+){
+ setTaskList(prev=>
+        prev.map(task=>{
+          if(task.id === id){
+            return{
+              ...task,priority:newPriority
+            };
+          }else{
+            return task;
+          }
+        })
+      )
+}
 return(
 <main className="tasks-page">
     <h1>Tasks</h1>
@@ -44,6 +82,8 @@ return(
       <TaskCard
         key={task.id}
         task={task}
+        onStatusChange = {handleTaskStatusChange}
+        onPriorityChange = {handleTaskPriorityChange}
       />
     ))
   )}
