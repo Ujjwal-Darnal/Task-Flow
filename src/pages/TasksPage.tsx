@@ -23,6 +23,7 @@ const[taskStatus,setTaskStatus] = useState<Task["status"]>("To Do")
 
 const[taskPriority,setTaskPriority] = useState<Task["priority"]>("Medium")
 
+const[taskEditingId,setTaskEditingId] = useState<number|null>(null);
 
 const filteredTasks = taskList.filter((task) => selectedProjectId=== "all" ? true:task.projectId === selectedProjectId);
 
@@ -77,29 +78,86 @@ function handleCreateTask(
     return;
   }
 
-  const newTask:Task = {
-    id:Math.max(0,...taskList.map(task => task.id))+1,
-    projectId:taskProjectId,
+ if (taskEditingId !== null) {
+  // Update the existing task
+  setTaskList(prev =>
+    prev.map(task =>
+      task.id === taskEditingId
+        ? {
+            ...task,
+            projectId: taskProjectId,
+            title: trimmedTitle,
+            description: taskDescription.trim(),
+            status: taskStatus,
+            priority: taskPriority,
+          }
+        : task
+    )
+  );
+} else {
+  // Create a new task
+  const newTask: Task = {
+    id: Math.max(0, ...taskList.map(task => task.id)) + 1,
+    projectId: taskProjectId,
     title: trimmedTitle,
-    description:taskDescription.trim(),
-    status:taskStatus,
-    priority:taskPriority,
+    description: taskDescription.trim(),
+    status: taskStatus,
+    priority: taskPriority,
     createdAt: new Date().toISOString().slice(0, 10),
-    
-  }
-  //Add the task to react state
-  setTaskList(prev=>[
-    ...prev,newTask
-  ])
+  };
 
+  // Add the task to react state
+  setTaskList(prev => [...prev, newTask]);
+}
+
+
+  
  // Reset the form after creating a task
-setTaskDescription("");
+resetTaskForm();
+setShowCreateTaskForm(false);
+}
+
+// function to reset the task form
+function resetTaskForm(){
+ 
+    setTaskDescription("");
 setTaskTitle("");
 setTaskProjectId("");
 setTaskPriority("Medium");
 setTaskStatus("To Do");
-setShowCreateTaskForm(false);
+setTaskEditingId(null);
+  
 }
+
+// function to delete the task
+function handleDeleteTask(id:number){
+const confirmed = window.confirm(
+  "Are you sure! you want to delete the task"
+)
+if(!confirmed){
+  return;
+}
+
+setTaskList((prev)=>(
+  prev.filter((task)=>task.id!== id)
+))
+}
+
+// function to edit task
+function handleEditTask(id:number){
+  const taskToEdit = taskList.find((task)=>task.id===id);
+  if(!taskToEdit) return;
+
+  setTaskEditingId(id);
+  setTaskTitle(taskToEdit.title);
+  setTaskPriority(taskToEdit.priority);
+  setTaskDescription(taskToEdit.description);
+  setTaskStatus(taskToEdit.status);
+  setTaskProjectId(taskToEdit.projectId);
+  setShowCreateTaskForm(true);
+
+}
+
 return(
 <main className="tasks-page">
     <h1>Tasks</h1>
@@ -132,7 +190,8 @@ return(
     <button 
     type="button"
     className="new-task-btn"
-    onClick={()=> setShowCreateTaskForm(prev=>!prev)}
+    onClick={()=>{
+      resetTaskForm(); setShowCreateTaskForm(prev=>!prev)}}
     >{showCreateTaskForm?"Cancel":"+ New Task"}</button>
 
 {/* ----- Render the form only when the user chooses to create a task */}
@@ -141,6 +200,11 @@ return(
       className="create-task-form"
       onSubmit={handleCreateTask}>
         {/* ------  Task Title */}
+        <h2>
+  {taskEditingId !== null
+    ? "Edit Task"
+    : "Create New Task"}
+</h2>
       <label htmlFor="taskTitle">Task Title</label>
       <input 
       type="text"
@@ -217,7 +281,11 @@ onChange={(e)=>{
   <option value="High">High</option>
 </select>
 
-<button type="submit">Create Task</button>
+<button 
+className="create-task-submit"
+type="submit">
+  {taskEditingId!==null? "Save Changes":"Create Task"}
+</button>
       </form>
     )}
 
@@ -233,6 +301,8 @@ onChange={(e)=>{
         task={task}
         onStatusChange = {handleTaskStatusChange}
         onPriorityChange = {handleTaskPriorityChange}
+        onDeleteTask = {handleDeleteTask}
+        onEditTask = {handleEditTask}
       />
     ))
   )}

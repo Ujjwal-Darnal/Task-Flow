@@ -11,9 +11,11 @@ interface TaskCardProps {
     id:number,
     newPriority:Task["priority"]
   )=>void;
+  onDeleteTask:(id:number)=>void
+  onEditTask:(id:number)=>void
 }
 
-function TaskCard({ task,onStatusChange,onPriorityChange }: TaskCardProps) {
+function TaskCard({ task,onStatusChange,onPriorityChange,onDeleteTask,onEditTask }: TaskCardProps) {
   return (
     <article className="task-card">
       <h2>{task.title}</h2>
@@ -70,6 +72,20 @@ function TaskCard({ task,onStatusChange,onPriorityChange }: TaskCardProps) {
             {task.createdAt}
           </time>
         </p>
+      </div>
+
+      <div className="task-footer">
+        <button
+        className="delete-task-btn"
+        onClick={()=>onDeleteTask(task.id)}
+        aria-label={`Delete ${task.title}`}>
+        Delete
+        </button>
+
+        <button
+        className="edit-task-btn"
+        onClick={()=>onEditTask(task.id)}
+        aria-label={`Edit ${task.title}`}>Edit</button>
       </div>
     </article>
   );
