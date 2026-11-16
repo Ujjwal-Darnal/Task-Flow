@@ -98,16 +98,6 @@
   transition: border-color 0.2s ease;
 }
 
-/* ===== DISABLED DROPDOWNS ===== */
-
-.task-status select:disabled,
-.task-priority select:disabled {
-  opacity: 1;
-  background-color: #ffffff;
-  color: #475569;
-  -webkit-text-fill-color: #475569;
-  cursor: not-allowed;
-}
 
 /* ===== ENABLED DROPDOWNS ===== */
 
@@ -150,9 +140,58 @@ outline-offset: 2px;
   font-weight: 500;
 }
 
-/* =====================================
-   MOBILE
-===================================== */
+/* task footer ====  */
+.task-footer{
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* delete and edit button */
+.delete-task-btn,
+.edit-task-btn {
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+
+.delete-task-btn {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.delete-task-btn:hover {
+  background: #fee2e2;
+}
+
+.delete-task-btn:focus-visible {
+  outline: 2px solid #b91c1c;
+  outline-offset: 2px;
+}
+
+.edit-task-btn {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.edit-task-btn:hover {
+  background: #dbeafe;
+}
+
+.edit-task-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* mobile responsiveness */
 
 @media (max-width: 480px) {
   .task-card {
@@ -165,12 +204,14 @@ outline-offset: 2px;
   }
 }
 
-/* =====================================
-   REDUCED MOTION
-===================================== */
-
+/* reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .task-card {
+  .task-card,
+  .delete-task-btn,
+  .edit-task-btn,
+  .task-status select,
+  .task-priority select {
     transition: none;
   }
 }
+
