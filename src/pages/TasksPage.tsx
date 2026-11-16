@@ -1,15 +1,27 @@
-import { tasks } from "../data/tasks";
+
 import TaskCard from "../components/TaskCard"
 import { useState } from "react";
-import { projects } from "../data/projects";
 import "../css/TasksPage.css"
 import type { Task } from "../types/task";
+import type {Project} from "../types/project"
+import type { Dispatch,SetStateAction } from "react";
 
-function TasksPage(){
+interface TasksPageProps {
+  projectList:Project[];
+  taskList:Task[];
+  setTaskList:Dispatch<SetStateAction<Task[]>>
+}
+
+
+function TasksPage({
+  projectList,
+  taskList,
+  setTaskList,
+}:TasksPageProps){
 
 const [selectedProjectId,setSelectedProjectId] = useState<number | "all">("all");
 
-const[taskList,setTaskList] = useState<Task[]>(tasks);
+
 
 const[showCreateTaskForm,setShowCreateTaskForm] = useState <boolean>(false);
 
@@ -177,7 +189,7 @@ return(
         }}
         >
           <option value="all">All Projects</option>
-        {projects.map((project)=>(
+        {projectList.map((project)=>(
           <option
           key={project.id}
            value = {project.id}
@@ -241,7 +253,7 @@ return(
 >
   <option value="">Select a project</option>
 
-  {projects.map((project) => (
+  {projectList.map((project) => (
     <option
       key={project.id}
       value={project.id}

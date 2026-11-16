@@ -1,11 +1,25 @@
 import { projects } from "../data/projects";
 import ProjectCard from "../components/ProjectCard";
 import "../css/ProjectsPage.css"
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import type { Project } from "../types/project";
+import type {Task} from "../types/task"
 
-function ProjectsPage() {
-    const [projectList, setProjectList] = useState<Project[]>(projects);
+
+    interface ProjectsPageProps{
+        projectList:Project[];
+        setProjectList:React.Dispatch<React.SetStateAction<Project[]>>
+        taskList:Task[];
+    }
+
+
+function ProjectsPage({
+    projectList,
+    setProjectList,
+    taskList,
+}:ProjectsPageProps) {
+
+   
 
     const [showCreateForm, setShowCreateForm] = useState<boolean>(false);
 
@@ -63,18 +77,34 @@ function ProjectsPage() {
         setShowCreateForm(false);
     }
 
-    // ------ function to delete card
+    // funcitonto delete project 
     function handleDeleteProject(id: number) {
-        const confirmed = window.confirm(
-            "Are you sure you want to delete this project?"
-        );
-        if (!confirmed) {
-            return;
-        }
 
-        setProjectList((prev) =>
-            prev.filter((project) => project.id !== id))
-    }
+  // Check whether the project contains any tasks
+  const hasTasks = taskList.some(
+    (task) => task.projectId === id
+  );
+
+  // Prevent deletion if tasks exist
+  if (hasTasks) {
+    alert("Cannot delete this project because it contains tasks.");
+    return;
+  }
+
+  // Ask for confirmation
+  const confirmed = window.confirm(
+    "Are you sure you want to delete this project?"
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  // Delete the project
+  setProjectList((prev) =>
+    prev.filter((project) => project.id !== id)
+  );
+}
 
     // ---- function to change the status
     function handleStatusChange(
