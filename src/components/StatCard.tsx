@@ -1,0 +1,14 @@
+interface StatCardProps{
+    title:string;
+    value:number|string;
+}
+function StatCard({title,value}:StatCardProps){
+    return(
+        <div className="stat-card">
+            <h2>{title}</h2>
+            <p>{value}</p>
+        </div>
+    )
+}
+
+export default StatCard;

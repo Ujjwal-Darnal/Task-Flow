@@ -69,7 +69,13 @@ useEffect(()=>{
       </nav>
 
       <Routes>
-        <Route path="/" element={<DashboardPage />} />
+        <Route
+         path="/" 
+         element={<DashboardPage
+          projectList = {projectList}
+          taskList = {taskList} />}
+         
+         />
         <Route 
         path="/projects" 
         element={<ProjectsPage 
