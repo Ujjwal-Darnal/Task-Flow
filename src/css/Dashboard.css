@@ -52,6 +52,19 @@
   font-size: 0.875rem;
 }
 
+.status-distribution {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.status-distribution h2 {
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+}
+
 @media (max-width: 768px) {
   .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
